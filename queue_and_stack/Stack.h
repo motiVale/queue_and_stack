@@ -7,14 +7,23 @@ using namespace std;
 class Stack
 {
 	//Нижняя и верхняя границы стека
-	enum { EMPTY = -1, FULL = 20 };
+	unsigned int size = 20;//0 - empty; 20 - max;
+
 	//Массив для хранения данных
-	char st[FULL + 1];
-	//Указатель на вершину стека
-	int top;
+	char* st;
+	char top;
+	
 public:
 	//Конструктор
-	Stack();
+	Stack() : st{ new char[size]}, top{0} {
+		st[0] = top;
+	}
+	Stack(int _size) : size{ _size }, st{ new char[size] }, top{0} {
+		st[0] = top;
+	}
+	~Stack() {
+		delete[] st;
+	}
 	bool IsEmpty();
 	//Добавление элемента
 	void Push(char c);
@@ -28,5 +37,6 @@ public:
 	bool IsFull();
 	//Количество элементов в стеке
 	int GetCount();
+
 };
 }
